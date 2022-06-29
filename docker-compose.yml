@@ -1,0 +1,22 @@
+version: "3.6"
+
+services:
+  aspnetcorespa:
+    image: ${DOCKER_REGISTRY-}aspnetcorespa
+    build:
+      context: .
+      dockerfile: src/Presentation/Web/Dockerfile
+    networks:
+      - app-network
+
+  aspnetcorests:
+    image: ${DOCKER_REGISTRY-}aspnetcorests
+    build:
+      context: .
+      dockerfile: src/Presentation/STS/Dockerfile
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

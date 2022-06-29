@@ -1,416 +1,228 @@
-Contribution: 2020-06-28 20:00
+[![Actions Status Web](https://github.com/asadsahi/aspnetcorespa/workflows/Web/badge.svg)](https://github.com/asadsahi/aspnetcorespa/actions?query=workflow%3AWEB)
+[![Actions Status STS](https://github.com/asadsahi/aspnetcorespa/workflows/STS/badge.svg)](https://github.com/asadsahi/aspnetcorespa/actions?query=workflow%3ASTS)
+[![Build Status](https://asadsahi.visualstudio.com/playground/_apis/build/status/asadsahi.AspNetCoreSpa?branchName=master)](https://asadsahi.visualstudio.com/playground/_build/latest?definitionId=20&branchName=master)
+[![Build status](https://ci.appveyor.com/api/projects/status/35j3sxdi22rhg70c?svg=true)](https://ci.appveyor.com/project/asadsahi/aspnetcorespa)
+[![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-Contribution: 2020-06-28 20:01
+## Features
 
-Contribution: 2020-06-28 20:02
+- [ASP.NET Core 6.0](http://www.dot.net/)
+- [Entity Framework Core 6.0](https://docs.efproject.net/en/latest/)
+  - Both Sql Server and Sql lite databases are supported (Check installation instrcutions for more details)
+- [Identity Server 4](http://identityserver.io/)
+- [Angular 11](https://angular.io/)
+- [Angular CLI 11](https://cli.angular.io/)
+- Secure - with CSP and custom security headers
+- [SignalR](https://github.com/aspnet/SignalR/)
+- [SASS](http://sass-lang.com/)
+- Best [practices](https://angular.io/docs/ts/latest/guide/style-guide.html) for Angular code organisation.
+- [Clean Architecture](https://github.com/jasontaylordev/CleanArchitecture) inspired from Jason Taylor.
+- [PWA support](https://developers.google.com/web/progressive-web-apps/)
+- Fast Unit Testing with [Jest](https://facebook.github.io/jest/).
+- E2E testing with [Protractor](http://www.protractortest.org).l
+- [Compodoc](https://compodoc.github.io/compodoc/) for Angular documentation
+- Login and Registration functionality using [Identity Server implicit flow](http://identityserver.io/)
+- Extensible User/Role identity implementation
+- Social logins support with token based authentication, using [Identity Server](http://identityserver.io/)
+- Angular dynamic forms for reusable and DRY code.
+- [Swagger](http://swagger.io/) as Api explorer (Visit url **https://127.0.0.1:5005/swagger** OR whatever port visual studio has launched the website.). More [details](https://github.com/domaindrivendev/Swashbuckle.AspNetCore)
 
-Contribution: 2020-06-28 20:03
+## Pre-requisites
 
-Contribution: 2020-06-28 20:04
+1. [.Net 6.0 SDK](https://www.microsoft.com/net/core#windows)
+2. [Visual studio 2019](https://www.visualstudio.com/) OR [VSCode](https://code.visualstudio.com/) with [C#](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp) extension
+3. [NodeJs](https://nodejs.org/en/) (Latest LTS)
+4. [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server) (Optional: If MS SQL server required instead of Sqlite during development)
+5. [Docker](https://www.docker.com/) (Optional: If application will run inside docker container)
 
-Contribution: 2020-06-28 20:05
+## Installation
 
-Contribution: 2020-06-28 20:06
+1. Clone the repo:
 
-Contribution: 2020-06-29 20:00
+   git clone https://github.com/asadsahi/AspNetCoreSpa
 
-Contribution: 2020-06-29 20:01
+2. Change directory:
 
-Contribution: 2020-06-29 20:02
+   cd AspNetCoreSpa
 
-Contribution: 2020-06-29 20:03
+3. Restore packages:
 
-Contribution: 2020-07-01 20:00
+   dotnet restore AspNetCoreSpa.sln
 
-Contribution: 2020-07-01 20:01
+4. Install npm packages:
 
-Contribution: 2020-07-01 20:02
+   - cd src/Presentation/Web/ClientApp:
 
-Contribution: 2020-07-01 20:03
+   - npm install
 
-Contribution: 2020-07-01 20:04
+5. Start Frontend:
 
-Contribution: 2020-07-01 20:05
+   - npm start
 
-Contribution: 2020-07-01 20:06
+6. Run Backend:
 
-Contribution: 2020-07-01 20:07
+   - Using [VSCode](https://code.visualstudio.com/):
 
-Contribution: 2020-07-01 20:08
+     - If you are running for the first time, install dev certificates using command:
 
-Contribution: 2020-07-03 20:00
+     ```
+     dotnet dev-certs https --trust
+     ```
 
-Contribution: 2020-07-03 20:01
+     - From debug menu select `Web` profile to run api application
+     - From debug menu select `STS` profile to run Identity Server application
 
-Contribution: 2020-07-03 20:02
+   - Using [Visual Studio IDE](https://www.visualstudio.com/):
+     - Run `Web` and `STS` projects either individually or by setting multiple projects in solutions properties and hit F5
 
-Contribution: 2020-07-03 20:03
+7. Target either Sqlite or Microsoft SQL Server
 
-Contribution: 2020-07-03 20:04
+This project supports both databases OOTB.
 
-Contribution: 2020-07-03 20:05
+- Run with Sqlite: (Already configured to quickly run the project)
 
-Contribution: 2020-07-03 20:06
+  - Project is already setup with Sqlite specific database migrations
 
-Contribution: 2020-07-03 20:07
+- Run with Microsoft SQL Server:
+  - Delete `Migrations` folder from src/Infrastructure/Infrastructure/Persistence
+  - Change setting in appsettings.json called `useSqLite` from `true` to `false` and change `Web` connection string to your local Sql Server connection string
 
-Contribution: 2020-07-04 20:00
+7. Once the project is running use following test users to login:
 
-Contribution: 2020-07-04 20:01
+   2 Test users:
+   Username: admin@admin.com
+   Password: P@ssw0rd!
+   OR
+   Username: user@user.com
+   Password: P@ssw0rd!
 
-Contribution: 2020-07-22 20:00
+   Note: For production use Identity server hosted with appropriate configuration.
 
-Contribution: 2020-07-22 20:01
+# Managing Migrations
 
-Contribution: 2020-07-22 20:02
+## Make sure you have ef core global tools installed
 
-Contribution: 2020-07-22 20:03
+`dotnet tool install --global dotnet-ef`
 
-Contribution: 2020-07-22 20:04
+# Web Migrations
 
-Contribution: 2020-07-22 20:05
+## Using command line (from root of the project)
 
-Contribution: 2020-07-22 20:06
+### Create Migration
 
-Contribution: 2020-07-22 20:07
+`dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext -o Persistence/Migrations`
 
-Contribution: 2020-07-22 20:08
+### Update database
 
-Contribution: 2020-07-24 20:00
+`dotnet ef database update --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext`
 
-Contribution: 2020-07-24 20:01
+### Drop database
 
-Contribution: 2020-07-24 20:02
+`dotnet ef database drop --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context ApplicationDbContext`
 
-Contribution: 2020-07-25 20:00
+# Localization Migrations
 
-Contribution: 2020-07-25 20:01
+## Using command line (from root of the project)
 
-Contribution: 2020-07-25 20:02
+### Create Migration
 
-Contribution: 2020-07-25 20:03
+`dotnet ef migrations add migrationname --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext -o Localization/Migrations`
 
-Contribution: 2020-07-25 20:04
+### Update database
 
-Contribution: 2020-07-25 20:05
+`dotnet ef database update --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext`
 
-Contribution: 2020-07-25 20:06
+### Drop database
 
-Contribution: 2020-07-30 20:00
+`dotnet ef database drop --startup-project ./src/Presentation/Web --project ./src/Infrastructure/Infrastructure --context LocalizationDbContext`
 
-Contribution: 2020-07-30 20:01
+# Identity Migrations
 
-Contribution: 2020-07-30 20:02
+## Using command line (from root of the project)
 
-Contribution: 2020-07-30 20:03
+### Create Migration
 
-Contribution: 2020-07-30 20:04
+`dotnet ef migrations add migrationname --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext -o Identity/Migrations`
 
-Contribution: 2020-08-04 20:00
+### Update database
 
-Contribution: 2020-08-04 20:01
+`dotnet ef database update --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext`
 
-Contribution: 2020-08-05 20:00
+### Drop database
 
-Contribution: 2020-08-05 20:01
+`dotnet ef database drop --startup-project ./src/Presentation/STS --project ./src/Infrastructure/Infrastructure --context IdentityServerDbContext`
 
-Contribution: 2020-08-07 20:00
+# Other commands
 
-Contribution: 2020-08-07 20:01
+### Angular component scaffolding
 
-Contribution: 2020-08-07 20:02
+Note: You need to run commands from `src/Presentation/Web/ClientApp` directory: More information [here](https://angular.io/cli)
 
-Contribution: 2020-08-07 20:03
+### Angular tests - Using [Jest](https://jestjs.io/en/) and Angular jest [preset](https://github.com/thymikee/jest-preset-angular)
 
-Contribution: 2020-08-07 20:04
+```bash
+cd src/Presentation/Web/ClientApp
 
-Contribution: 2020-08-07 20:05
+npm test
+```
 
-Contribution: 2020-08-07 20:06
+### Compodoc Angular documentation
 
-Contribution: 2020-08-07 20:07
+- Steps to generate:
+  - npm i compodoc -g
+  - cd src/Presentation/Web/ClientApp
+  - npm run compodoc
+  - cd documentation
+  - http-server
 
-Contribution: 2020-08-07 20:08
+Compodoc documentation: ![alt text](compodoc.jpg "compodoc documentation")
 
-Contribution: 2020-08-09 20:00
+````
+### run end-to-end tests
+```bash
+# make sure you have your server running in another terminal (i.e run "dotnet run" command)
+npm run e2e
+````
 
-Contribution: 2020-08-09 20:01
+### run Protractor's elementExplorer (for end-to-end)
 
-Contribution: 2020-08-09 20:02
+```bash
+npm run webdriver:start
+# in another terminal
+npm run e2e:live
+```
 
-Contribution: 2020-08-09 20:03
+# Azure Deploy
 
-Contribution: 2020-08-09 20:04
+- You can set an environment variable for azure app deployment password
+  Set-Item -path env:AzureAppPass -value passwordhere
 
-Contribution: 2020-08-09 20:05
+```
+From powershell:
+./deploy-azure.ps1
+```
 
-Contribution: 2020-08-13 20:00
+# Deploy to heroku using its container service
 
-Contribution: 2020-08-13 20:01
+### Replace your app name where it is `aspnetcorespa`
 
-Contribution: 2020-08-13 20:02
+- dotnet publish -c release
+- docker build -t aspnetcorespa ./bin/release/net6.0/publish
+- heroku login
+- heroku container:login
+- docker tag aspnetcorespa registry.heroku.com/aspnetcorespa/web
+- docker push registry.heroku.com/aspnetcorespa/web
+  Note: There is a `deploy.heroku.ps1` script included with this project which automates above steps.
 
-Contribution: 2020-08-13 20:03
+# Deploy to Azure as App Service
 
-Contribution: 2020-08-13 20:04
+Set-Item -path env:AzureAppPass -value passwordhere
 
-Contribution: 2020-08-15 20:00
+```
+From powershell:
+./deploy-azure.ps1
+```
 
-Contribution: 2020-08-15 20:01
+---
 
-Contribution: 2020-08-15 20:02
-
-Contribution: 2020-08-15 20:03
-
-Contribution: 2020-08-15 20:04
-
-Contribution: 2020-08-15 20:05
-
-Contribution: 2020-08-17 20:00
-
-Contribution: 2020-08-17 20:01
-
-Contribution: 2020-08-17 20:02
-
-Contribution: 2020-08-17 20:03
-
-Contribution: 2020-08-17 20:04
-
-Contribution: 2020-08-17 20:05
-
-Contribution: 2020-08-17 20:06
-
-Contribution: 2020-08-17 20:07
-
-Contribution: 2020-08-17 20:08
-
-Contribution: 2020-08-20 20:00
-
-Contribution: 2020-08-20 20:01
-
-Contribution: 2020-08-20 20:02
-
-Contribution: 2020-08-20 20:03
-
-Contribution: 2020-08-23 20:00
-
-Contribution: 2020-08-23 20:01
-
-Contribution: 2020-08-23 20:02
-
-Contribution: 2020-08-23 20:03
-
-Contribution: 2020-08-23 20:04
-
-Contribution: 2020-08-25 20:00
-
-Contribution: 2020-08-27 20:00
-
-Contribution: 2020-08-27 20:01
-
-Contribution: 2020-08-27 20:02
-
-Contribution: 2020-08-27 20:03
-
-Contribution: 2020-08-27 20:04
-
-Contribution: 2020-08-27 20:05
-
-Contribution: 2020-08-31 20:00
-
-Contribution: 2020-08-31 20:01
-
-Contribution: 2020-08-31 20:02
-
-Contribution: 2020-09-02 20:00
-
-Contribution: 2020-09-02 20:01
-
-Contribution: 2020-09-02 20:02
-
-Contribution: 2020-09-02 20:03
-
-Contribution: 2020-09-02 20:04
-
-Contribution: 2020-09-02 20:05
-
-Contribution: 2020-09-02 20:06
-
-Contribution: 2020-09-02 20:07
-
-Contribution: 2020-09-08 20:00
-
-Contribution: 2020-09-08 20:01
-
-Contribution: 2020-09-08 20:02
-
-Contribution: 2020-09-08 20:03
-
-Contribution: 2020-09-08 20:04
-
-Contribution: 2020-09-09 20:00
-
-Contribution: 2020-09-09 20:01
-
-Contribution: 2020-09-09 20:02
-
-Contribution: 2020-09-09 20:03
-
-Contribution: 2020-09-09 20:04
-
-Contribution: 2020-09-09 20:05
-
-Contribution: 2020-09-09 20:06
-
-Contribution: 2020-09-09 20:07
-
-Contribution: 2020-09-09 20:08
-
-Contribution: 2020-09-11 20:00
-
-Contribution: 2020-09-11 20:01
-
-Contribution: 2020-09-11 20:02
-
-Contribution: 2020-09-11 20:03
-
-Contribution: 2020-09-11 20:04
-
-Contribution: 2020-09-11 20:05
-
-Contribution: 2020-09-11 20:06
-
-Contribution: 2020-09-11 20:07
-
-Contribution: 2020-09-13 20:00
-
-Contribution: 2020-09-13 20:01
-
-Contribution: 2020-09-13 20:02
-
-Contribution: 2020-09-13 20:03
-
-Contribution: 2020-09-13 20:04
-
-Contribution: 2020-09-13 20:05
-
-Contribution: 2020-09-13 20:06
-
-Contribution: 2020-09-13 20:07
-
-Contribution: 2020-09-13 20:08
-
-Contribution: 2020-09-15 20:00
-
-Contribution: 2020-09-15 20:01
-
-Contribution: 2020-09-15 20:02
-
-Contribution: 2020-09-15 20:03
-
-Contribution: 2020-09-15 20:04
-
-Contribution: 2020-09-15 20:05
-
-Contribution: 2020-09-15 20:06
-
-Contribution: 2020-09-15 20:07
-
-Contribution: 2020-09-16 20:00
-
-Contribution: 2020-09-16 20:01
-
-Contribution: 2020-09-16 20:02
-
-Contribution: 2020-09-16 20:03
-
-Contribution: 2020-09-16 20:04
-
-Contribution: 2020-09-17 20:00
-
-Contribution: 2020-09-23 20:00
-
-Contribution: 2020-09-23 20:01
-
-Contribution: 2020-09-23 20:02
-
-Contribution: 2020-10-01 20:00
-
-Contribution: 2020-10-01 20:01
-
-Contribution: 2020-10-01 20:02
-
-Contribution: 2020-10-01 20:03
-
-Contribution: 2020-10-01 20:04
-
-Contribution: 2020-10-01 20:05
-
-Contribution: 2020-10-01 20:06
-
-Contribution: 2020-10-04 20:00
-
-Contribution: 2020-10-04 20:01
-
-Contribution: 2020-10-04 20:02
-
-Contribution: 2020-10-04 20:03
-
-Contribution: 2020-10-04 20:04
-
-Contribution: 2020-10-04 20:05
-
-Contribution: 2020-10-04 20:06
-
-Contribution: 2020-10-05 20:00
-
-Contribution: 2020-10-05 20:01
-
-Contribution: 2020-10-05 20:02
-
-Contribution: 2020-10-05 20:03
-
-Contribution: 2020-10-05 20:04
-
-Contribution: 2020-10-05 20:05
-
-Contribution: 2020-10-05 20:06
-
-Contribution: 2020-10-06 20:00
-
-Contribution: 2020-10-06 20:01
-
-Contribution: 2020-10-06 20:02
-
-Contribution: 2020-10-07 20:00
-
-Contribution: 2020-10-07 20:01
-
-Contribution: 2020-10-07 20:02
-
-Contribution: 2020-10-07 20:03
-
-Contribution: 2020-10-07 20:04
-
-Contribution: 2020-10-07 20:05
-
-Contribution: 2020-10-12 20:00
-
-Contribution: 2020-10-12 20:01
-
-Contribution: 2020-10-12 20:02
-
-Contribution: 2020-10-12 20:03
-
-Contribution: 2020-10-12 20:04
-
-Contribution: 2020-10-12 20:05
-
-Contribution: 2020-10-12 20:06
-
-Contribution: 2020-10-14 20:00
-
-Contribution: 2020-10-14 20:01
-
-Contribution: 2020-10-14 20:02
-
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=RB7XESV8CP7GW)

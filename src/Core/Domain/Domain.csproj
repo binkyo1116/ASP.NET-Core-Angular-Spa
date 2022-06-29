@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>AspNetCoreSpa.Domain</RootNamespace>
+		<AssemblyName>AspNetCoreSpa.Domain</AssemblyName>
+	</PropertyGroup>
+
+</Project>

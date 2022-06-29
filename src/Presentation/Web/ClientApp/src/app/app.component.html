@@ -1,0 +1,19 @@
+<!-- app modal component -->
+<appc-loading></appc-loading>
+
+<app-toast aria-live="polite" aria-atomic="true"></app-toast>
+
+<ng-template modal>
+  <appc-modal-component></appc-modal-component>
+</ng-template>
+
+<!-- header component -->
+<appc-header></appc-header>
+
+<!-- component routing placeholder -->
+<main role="main">
+  <router-outlet #o="outlet"></router-outlet>
+</main>
+
+<!-- footer component -->
+<appc-footer></appc-footer>

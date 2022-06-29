@@ -1,0 +1,14 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "EmailSettings": {
+    "SmtpHost": "smtp.mailtrap.io",
+    "SmtpUsername": "a6380407b5ee9e",
+    "SmtpPassword": "6ecd7c223d4fe3"
+  }
+}

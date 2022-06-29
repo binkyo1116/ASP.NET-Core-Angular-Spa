@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppComponent snapshot created successfully 1`] = `
+<appc-root
+  appService={[Function MockAppService]}
+  authService={[Function MockAuthService]}
+  meta={[Function Meta]}
+  modalService={[Function ModalService]}
+  router={[Function Router]}
+  title={[Function Title]}
+>
+  <appc-header /><main
+    role="main"
+  >
+    <router-outlet />
+  </main><appc-footer />
+</appc-root>
+`;

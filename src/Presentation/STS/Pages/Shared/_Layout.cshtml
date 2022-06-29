@@ -1,0 +1,71 @@
+﻿@using AspNetCoreSpa.Application.Abstractions
+@using Microsoft.Extensions.Localization
+@inject IDeploymentEnvironment DeploymentEnvironment
+@inject IClientInfoService ClientInfoService
+@inject IStringLocalizer<string> StringLocalizer
+
+@{
+    var client = ClientInfoService.GetClient();
+    var appTitle = StringLocalizer.GetString("app_title");
+    var returnLink = client.ClientUri ?? "/";
+    var pageTitle = ViewData["Title"]?.ToString();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+
+    <title>
+        <if hide="string.IsNullOrEmpty(appTitle)">
+            @appTitle <if hide="string.IsNullOrEmpty(pageTitle)">- @pageTitle</if>
+        </if>
+    </title>
+
+    <partial name="_AppStyles" />
+
+</head>
+<body>
+
+    @await Html.PartialAsync("_Header", new { ReturnUrl = returnLink, AppTitle = appTitle })
+
+    <div class="container">
+        <partial name="_CookieConsentPartial" optional />
+
+        <main role="main">
+            <if hide="string.IsNullOrEmpty(pageTitle)">
+                <div class="row">
+                    <div class="col">
+                        <h1>
+                            @pageTitle
+                        </h1>
+                    </div>
+                </div>
+            </if>
+            @RenderBody()
+        </main>
+    </div>
+
+    <partial name="_Footer" />
+
+    <partial name="_AppScripts" />
+
+    @RenderSection("Scripts", required: false)
+
+<cache>
+    <!-- OS: @DeploymentEnvironment.OS -->
+    <!-- Machine: @DeploymentEnvironment.MachineName -->
+    <!-- Framework: @DeploymentEnvironment.RuntimeFramework -->
+    <!-- Environment: @DeploymentEnvironment.EnvironmentName -->
+    <!-- Branch: @DeploymentEnvironment.Branch -->
+    <!-- Tag: @DeploymentEnvironment.Tag -->
+    <!-- CommitSha: @DeploymentEnvironment.CommitSha -->
+</cache>
+
+</body>
+</html>
