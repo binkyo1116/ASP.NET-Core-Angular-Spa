@@ -43,24 +43,6 @@ namespace AspNetCoreSpa.Infrastructure.Email
             return Task.CompletedTask;
         }
 
-        public Task ForgottentPasswordEmail(string to, string link)
-        {
-            var registrationTemplate = GetBaseTemplate("RegistrationTemplate");
-
-            registrationTemplate = registrationTemplate.Replace("@user@", to)
-                .Replace("@linktext@", "Reset password")
-                .Replace("@link@", link);
-            var emailMessage = new EmailMessage
-            {
-                To = to,
-                Body = registrationTemplate,
-                Subject = "Reset password",
-                From = _emailSettings.SmtpSenderAddress
-            };
-            SendAsync(emailMessage);
-            return Task.CompletedTask;
-        }
-
         public Task SendCustomerCreatedEmail(EmailMessage emailMessage)
         {
             return Task.CompletedTask;
@@ -82,6 +64,24 @@ namespace AspNetCoreSpa.Infrastructure.Email
             return template;
         }
 
+        public Task ForgottentPasswordEmail(string to, string link)
+        {
+            var registrationTemplate = GetBaseTemplate("RegistrationTemplate");
+
+            registrationTemplate = registrationTemplate.Replace("@user@", to)
+                .Replace("@linktext@", "Reset password")
+                .Replace("@link@", link);
+            var emailMessage = new EmailMessage
+            {
+                To = to,
+                Body = registrationTemplate,
+                Subject = "Reset password",
+                From = _emailSettings.SmtpSenderAddress
+            };
+            SendAsync(emailMessage);
+            return Task.CompletedTask;
+        }
+        
         private Task SendAsync(EmailMessage emailMessage)
         {
             try

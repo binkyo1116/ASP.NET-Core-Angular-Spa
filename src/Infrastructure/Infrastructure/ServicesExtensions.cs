@@ -170,42 +170,7 @@ namespace AspNetCoreSpa.Infrastructure
 
             return identityBuilder;
         }
-        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                bool.TryParse(configuration["Data:useSqLite"], out var useSqlite);
-                bool.TryParse(configuration["Data:useInMemory"], out var useInMemory);
-                var connectionString = configuration["Data:Web"];
-
-                if (useInMemory)
-                {
-                    options.UseInMemoryDatabase(nameof(AspNetCoreSpa)); // Takes database name
-                }
-                else if (useSqlite)
-                {
-                    options.UseSqlite(connectionString, b =>
-                    {
-                        b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
-                        //b.UseNetTopologySuite();
-                    });
-                }
-                else
-                {
-                    options.UseSqlServer(connectionString, b =>
-                    {
-                        b.MigrationsAssembly("AspNetCoreSpa.Infrastructure");
-                        // Add following package to enable net topology suite for sql server:
-                        // Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite
-                        //b.UseNetTopologySuite();
-                    });
-                }
-            });
-
-            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
-
-            return services;
-        }
+        
 
         private static IServiceCollection AddCustomLocalization(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
         {
@@ -244,6 +209,42 @@ namespace AspNetCoreSpa.Infrastructure
             return services;
         }
 
+        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                bool.TryParse(configuration["Data:useSqLite"], out var useSqlite);
+                bool.TryParse(configuration["Data:useInMemory"], out var useInMemory);
+                var connectionString = configuration["Data:Web"];
+
+                if (useInMemory)
+                {
+                    options.UseInMemoryDatabase(nameof(AspNetCoreSpa)); // Takes database name
+                }
+                else if (useSqlite)
+                {
+                    options.UseSqlite(connectionString, b =>
+                    {
+                        b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                        //b.UseNetTopologySuite();
+                    });
+                }
+                else
+                {
+                    options.UseSqlServer(connectionString, b =>
+                    {
+                        b.MigrationsAssembly("AspNetCoreSpa.Infrastructure");
+                        // Add following package to enable net topology suite for sql server:
+                        // Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite
+                        //b.UseNetTopologySuite();
+                    });
+                }
+            });
+
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+
+            return services;
+        }
         private static IServiceCollection AddCustomUi(this IServiceCollection services, IWebHostEnvironment environment)
         {
             services.AddOpenApiDocument(configure =>
